@@ -1,4 +1,26 @@
+    function jedaWaktu(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
+        async function bubbleSort() {
+            let kotakKotak = document.querySelectorAll('.kotak');
+            let ditukar;
+            let n = kotakKotak.length;
+            do {
+                ditukar = false;
+                for (let i = 0; i < n - 1; i++) {
+                    let tinggi1 = parseInt(kotakKotak[i].style.height);
+                    let tinggi2 = parseInt(kotakKotak[i + 1].style.height);
+                    if (tinggi1 > tinggi2) {
+                        kotakKotak[i].style.height = tinggi2 + 'px';
+                        kotakKotak[i + 1].style.height = tinggi1 + 'px';
+                        ditukar = true;
+                        await jedaWaktu(500); // Jeda untuk animasi (lebih lambat)
+                    }
+                }
+                n--;
+            } while (ditukar);
+        }
         async function selectionSort() {
             let kotakKotak = document.querySelectorAll('.kotak');
             let n = kotakKotak.length;
