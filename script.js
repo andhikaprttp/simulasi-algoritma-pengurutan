@@ -15,7 +15,7 @@ async function bubbleSort() {
         kotakKotak[i].style.height = tinggi2 + "px";
         kotakKotak[i + 1].style.height = tinggi1 + "px";
         ditukar = true;
-        await jedaWaktu(500); // Jeda untuk animasi (lebih lambat)
+        await jedaWaktu(500); // 
       }
     }
     n--;
