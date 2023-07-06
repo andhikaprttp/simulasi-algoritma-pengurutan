@@ -62,7 +62,7 @@ async function insertionSort() {
     }
     kotakKotak[j + 1].style.height = saatIniHeight;
     kotakKotak[j + 1].textContent = saatIniText;
-    await jedaWaktu(500); // Jeda untuk animasi (lebih lambat)
+    await jedaWaktu(500); 
   }
 }
 
