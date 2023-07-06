@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulasi Algoritma Pengurutan</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 500px;
+        }
+
+        .kotak {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            width: 40px;
+            margin: 0 1px;
+            border: 1px solid black;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulasi Algoritma Pengurutan</h1>
+    <div class="container">
+        <div class="kotak" style="height: 100px; background-color: red;">1</div>
+        <div class="kotak" style="height: 200px; background-color: blue;">2</div>
+        <div class="kotak" style="height: 150px; background-color: yellow;">3</div>
+        <div class="kotak" style="height: 120px; background-color: green;">4</div>
+        <div class="kotak" style="height: 250px; background-color: orange;">5</div>
+    </div>
+
+    <button onclick="mulaiPengurutan('bubbleSort')">Bubble Sort</button>
+    <button onclick="mulaiPengurutan('selectionSort')">Selection Sort</button>
+    <button onclick="mulaiPengurutan('insertionSort')">Insertion Sort</button>
+    <button onclick="location.reload()">Pilih Algoritma Lagi</button>
+
+    <script>
+        function jedaWaktu(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function bubbleSort() {
+            let kotakKotak = document.querySelectorAll('.kotak');
+            let ditukar;
+            let n = kotakKotak.length;
+            do {
+                ditukar = false;
+                for (let i = 0; i < n - 1; i++) {
+                    let tinggi1 = parseInt(kotakKotak[i].style.height);
+                    let tinggi2 = parseInt(kotakKotak[i + 1].style.height);
+                    if (tinggi1 > tinggi2) {
+                        kotakKotak[i].style.height = tinggi2 + 'px';
+                        kotakKotak[i + 1].style.height = tinggi1 + 'px';
+                        ditukar = true;
+                        await jedaWaktu(500); // Jeda untuk animasi (lebih lambat)
+                    }
+                }
+                n--;
+            } while (ditukar);
+        }
+
+        async function selectionSort() {
+            let kotakKotak = document.querySelectorAll('.kotak');
+            let n = kotakKotak.length;
+            for (let i = 0; i < n - 1; i++) {
+                let indeksMin = i;
+                for (let j = i + 1; j < n; j++) {
+                    let tinggi1 = parseInt(kotakKotak[j].style.height);
+                    let tinggiMin = parseInt(kotakKotak[indeksMin].style.height);
+                    if (tinggi1 < tinggiMin) {
+                        indeksMin = j;
+                    }
+                }
+                if (indeksMin !== i) {
+                    let tempHeight = kotakKotak[i].style.height;
+                    let tempText = kotakKotak[i].textContent;
+                    kotakKotak[i].style.height = kotakKotak[indeksMin].style.height;
+                    kotakKotak[i].textContent = kotakKotak[indeksMin].textContent;
+                    kotakKotak[indeksMin].style.height = tempHeight;
+                    kotakKotak[indeksMin].textContent = tempText;
+                    await jedaWaktu(500); // Jeda untuk animasi (lebih lambat)
+                }
+            }
+        }
+
+        async function insertionSort() {
+            let kotakKotak = document.querySelectorAll('.kotak');
+            let n = kotakKotak.length;
+            for (let i = 1; i < n; i++) {
+                let saatIniHeight = kotakKotak[i].style.height;
+                let saatIniText = kotakKotak[i].textContent;
+                let j = i - 1;
+                while (j >= 0 && parseInt(kotakKotak[j].style.height) > parseInt(saatIniHeight)) {
+                    kotakKotak[j + 1].style.height = kotakKotak[j].style.height;
+                    kotakKotak[j + 1].textContent = kotakKotak[j].textContent;
+                    j--;
+                }
+                kotakKotak[j + 1].style.height = saatIniHeight;
+                kotakKotak[j + 1].textContent = saatIniText;
+                await jedaWaktu(500); // Jeda untuk animasi (lebih lambat)
+            }
+        }
+
+        function mulaiPengurutan(algoritma) {
+            switch (algoritma) {
+                case 'bubbleSort':
+                    bubbleSort();
+                    break;
+                case 'selectionSort':
+                    selectionSort();
+                    break;
+                case 'insertionSort':
+                    insertionSort();
+                    break;
+                default:
+                    console.log('Algoritma pengurutan tidak valid');
+            }
+        }
+    </script>
+</body>
+</html>
