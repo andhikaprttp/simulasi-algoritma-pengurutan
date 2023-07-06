@@ -40,7 +40,7 @@ async function selectionSort() {
       kotakKotak[i].textContent = kotakKotak[indeksMin].textContent;
       kotakKotak[indeksMin].style.height = tempHeight;
       kotakKotak[indeksMin].textContent = tempText;
-      await jedaWaktu(500); // Jeda untuk animasi (lebih lambat)
+      await jedaWaktu(500); 
     }
   }
 }
